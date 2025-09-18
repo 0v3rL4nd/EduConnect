@@ -1,9 +1,14 @@
 package com.piattaforme.educonnect.persistence.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -42,4 +47,47 @@ public class Payment {
 
     @Column(name = "external_payment_id")
     private String externalPaymentId;
+
+    public Payment(Student student, Booking savedBooking, BigDecimal price, PaymentMethod selectedPaymentMethod) {
+        this.student = student;
+        this.booking = savedBooking;
+        this.amount = price;
+        this.paymentMethod = selectedPaymentMethod;
+    }
+
+    public Payment() {
+
+    }
+
+    public void setStatus(PaymentStatus paymentStatus) {
+        this.status = paymentStatus;
+    }
+
+    public void setExternalPaymentId(String externalPaymentId) {
+        this.externalPaymentId = externalPaymentId;
+    }
+
+    public void setTransactionId(String s) {
+        this.transactionId = s;
+    }
+
+    public void markAsProcessed() {
+        this.status = PaymentStatus.COMPLETED;
+    }
+
+    public void markAsFailed(String pagamentoRifiutatoDalProvider) {
+        this.status = PaymentStatus.FAILED;
+    }
+
+    public PaymentStatus getStatus() {
+        return status;
+    }
+
+    public void setFailureReason(String reason) {
+        this.status = PaymentStatus.FAILED;
+    }
+
+    public Booking getBooking() {
+        return booking;
+    }
 }

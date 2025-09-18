@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -91,4 +92,22 @@ public interface TutorRepository extends JpaRepository<Tutor, Long> {
             "WHERE t.isActive = true " +
             "ORDER BY t.totalLessons DESC")
     List<Tutor> findMostExperiencedTutors(Pageable pageable);
+
+    // Controllo conflitti orari per tutor
+    @Query("SELECT l FROM Lesson l WHERE l.tutor = :tutor " +
+            "AND l.status IN ('AVAILABLE', 'BOOKED') " +
+            "AND ((l.startTime <= :endTime AND l.endTime >= :startTime))")
+    List<Lesson> findConflicting(@Param("tutor") Tutor tutor,
+                                 @Param("startTime") LocalDateTime startTime,
+                                 @Param("endTime") LocalDateTime endTime);
+
+    // Controllo conflitti per tutor e materia specifica
+    @Query("SELECT l FROM Lesson l WHERE l.tutor = :tutor AND l.subject = :subject " +
+            "AND l.status IN ('AVAILABLE', 'BOOKED') " +
+            "AND ((l.startTime <= :endTime AND l.endTime >= :startTime))")
+    List<Lesson> findConflictingByTutorAndSubject(@Param("tutor") Tutor tutor,
+                                                  @Param("subject") Subject subject,
+                                                  @Param("startTime") LocalDateTime startTime,
+                                                  @Param("endTime") LocalDateTime endTime);
 }
+

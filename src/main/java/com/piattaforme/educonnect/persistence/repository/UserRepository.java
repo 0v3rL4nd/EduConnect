@@ -1,5 +1,6 @@
 package com.piattaforme.educonnect.persistence.repository;
 
+
 import com.piattaforme.educonnect.persistence.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
