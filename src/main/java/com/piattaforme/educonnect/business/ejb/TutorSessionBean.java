@@ -2,6 +2,9 @@ package com.piattaforme.educonnect.business.ejb;
 
 import com.piattaforme.educonnect.persistence.entity.*;
 import com.piattaforme.educonnect.persistence.repository.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -11,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class TutorSessionBean {

@@ -21,7 +21,19 @@
         <spring.boot.version>2.7.5</spring.boot.version>
         <hibernate.version>5.6.12.Final</hibernate.version>
         <mysql.version>8.0.33</mysql.version>
+        <spring-cloud-gcp.version>3.6.3</spring-cloud-gcp.version>
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>${spring-cloud-gcp.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Spring Boot Starters -->
@@ -131,6 +143,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>7.0.0-M9</version>
         </dependency>
 
         <!-- Test Dependencies -->

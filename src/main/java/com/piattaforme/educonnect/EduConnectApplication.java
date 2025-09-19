@@ -1,4 +1,4 @@
-package com.piattaforme;
+package com.piattaforme.educonnect;
 
 
 import org.springframework.boot.SpringApplication;

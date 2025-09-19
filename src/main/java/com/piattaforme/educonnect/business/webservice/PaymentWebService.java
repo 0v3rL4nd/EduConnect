@@ -22,8 +22,8 @@ import java.math.BigDecimal;
 @Stateless
 public class PaymentWebService {
 
-    @Inject
     private PaymentSessionBean paymentSessionBean;
+    PaymentResponseDTO response = new PaymentResponseDTO();
 
     /**
      * Processa pagamento tramite provider esterno
@@ -44,7 +44,7 @@ public class PaymentWebService {
             Payment payment = paymentSessionBean.processPayment(
                     bookingId, method, externalTransactionId);
 
-            PaymentResponseDTO response = new PaymentResponseDTO();
+
             response.setSuccess(true);
             response.setTransactionId(payment.getTransactionId());
             response.setStatus(payment.getStatus().name());

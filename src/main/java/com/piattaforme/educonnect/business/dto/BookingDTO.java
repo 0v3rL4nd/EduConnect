@@ -2,10 +2,14 @@ package com.piattaforme.educonnect.business.dto;
 
 import com.piattaforme.educonnect.persistence.entity.BookingStatus;
 import com.piattaforme.educonnect.persistence.entity.PaymentStatus;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class BookingDTO {
     private Long id;
     private Long studentId;

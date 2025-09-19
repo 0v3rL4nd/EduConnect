@@ -2,15 +2,22 @@ package com.piattaforme.educonnect.business.ejb;
 
 import com.piattaforme.educonnect.persistence.entity.*;
 import com.piattaforme.educonnect.persistence.repository.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class BookingSessionBean {
@@ -162,8 +169,14 @@ public class BookingSessionBean {
      * Recupera prenotazioni per tutor - operazione read-only
      */
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Booking> getBookingsForTutor(Optional<Tutor> tutor) {
+    public List<Booking> getBookingsForTutor(Tutor tutor) {
         return bookingRepository.findByTutorOrderByBookingDateDesc(tutor);
+    }
+
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Booking> getBookingsForTutor(Optional<Tutor> tutor) {
+        return tutor.map(t -> bookingRepository.findByTutorOrderByBookingDateDesc(t))
+                .orElse(Collections.emptyList());
     }
 
     /**

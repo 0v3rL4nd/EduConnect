@@ -3,6 +3,9 @@ package com.piattaforme.educonnect.business.ejb;
 
 import com.piattaforme.educonnect.persistence.entity.User;
 import com.piattaforme.educonnect.persistence.repository.UserRepository;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -11,6 +14,9 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
+
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class UserSessionBean {

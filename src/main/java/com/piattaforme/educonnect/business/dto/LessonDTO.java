@@ -2,10 +2,14 @@ package com.piattaforme.educonnect.business.dto;
 
 import com.piattaforme.educonnect.persistence.entity.LessonStatus;
 import com.piattaforme.educonnect.persistence.entity.LessonType;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class LessonDTO {
     private Long id;
     private Long tutorId;

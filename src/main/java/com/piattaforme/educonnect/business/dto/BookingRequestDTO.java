@@ -1,7 +1,12 @@
 package com.piattaforme.educonnect.business.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 public class BookingRequestDTO {
 
     @NotNull(message = "ID studente è obbligatorio")

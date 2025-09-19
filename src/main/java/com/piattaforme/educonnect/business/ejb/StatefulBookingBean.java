@@ -1,9 +1,11 @@
-package com.piattaforme.educonnect.business.dto;
+package com.piattaforme.educonnect.business.ejb;
 
 import com.piattaforme.educonnect.persistence.entity.*;
 import com.piattaforme.educonnect.persistence.repository.*;
-import lombok.Getter;
-import lombok.Setter;
+import com.piattaforme.educonnect.business.dto.BookingCartItem;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
@@ -14,12 +16,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Stateful Session Bean per gestire il processo di prenotazione multi-step
- * Mantiene lo stato del carrello di prenotazione per tutta la sessione utente
- */
-@Getter
-@Setter
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class StatefulBookingBean {
@@ -41,6 +39,8 @@ public class StatefulBookingBean {
 
     @Inject
     private PaymentRepository paymentRepository;
+
+
 
     /**
      * Inizializza la sessione di prenotazione per uno studente

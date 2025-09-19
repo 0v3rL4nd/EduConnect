@@ -6,6 +6,7 @@ import com.piattaforme.educonnect.business.dto.CalendarEventDTO;
 import com.piattaforme.educonnect.business.ejb.BookingSessionBean;
 import com.piattaforme.educonnect.persistence.entity.Tutor;
 import com.piattaforme.educonnect.persistence.repository.TutorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -26,8 +27,10 @@ import java.util.stream.Collectors;
 @Stateless
 public class CalendarWebService {
 
-    @Inject
+    @Autowired
     private BookingSessionBean bookingSessionBean;
+
+    @Autowired
     private TutorRepository tutorRepository;
 
     /**
